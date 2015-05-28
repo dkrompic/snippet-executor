@@ -1,0 +1,144 @@
+rails new --skip-test-unit --skip-bundle --database=postgresql snippet-executor
+git init .
+Gemfile: https->http
+bundle install --path vendor\bundle
+
+c:\PostgreSQL\9.4\bin\pg_ctl start -D "C:\Users\dusan.krompic\AppData\PostgreSQL9.4\data"
+bundle exec rake db:migrate
+bundle exec rake db:setup
+    snippet-executor_development already exists
+    snippet-executor_test already exists
+    -- enable_extension("plpgsql")
+       -> 0.1200s
+    -- initialize_schema_migrations_table()
+       -> 0.1470s
+    -- enable_extension("plpgsql")
+       -> 0.1060s
+    -- initialize_schema_migrations_table()
+       -> 0.0650s
+
+# Gem file updated - test tools added
+bundle exec rails generate rspec:install
+      create  .rspec
+      create  spec
+      create  spec/spec_helper.rb
+      create  spec/rails_helper.rb
+      
+bundle exec rails generate cucumber:install
+      create  config/cucumber.yml
+      create  script/cucumber
+       chmod  script/cucumber
+      create  features/step_definitions
+      create  features/step_definitions/.gitkeep
+      create  features/support
+      create  features/support/env.rb
+       exist  lib/tasks
+      create  lib/tasks/cucumber.rake
+        gsub  config/database.yml
+        gsub  config/database.yml
+       force  config/database.yml
+
+# Gem file updated - 'devise' added
+rails generate devise:install
+      create  config/initializers/devise.rb
+      create  config/locales/devise.en.yml
+rails generate devise User
+      invoke  active_record
+      create    db/migrate/20150528214024_devise_create_users.rb
+      create    app/models/user.rb
+      invoke    rspec
+      create      spec/models/user_spec.rb
+      invoke      factory_girl
+      create        spec/factories/users.rb
+      insert    app/models/user.rb
+       route  devise_for :users
+bundle exec rake db:migrate
+rails generate migration add_username_to_users username:string:uniq
+      invoke  active_record
+      create    db/migrate/20150528214942_add_username_to_users.rb       
+bundle exec rake db:migrate
+# Gem file updated - 'rails_layout' and 'bootstrap-sass' added
+bundle install --path vendor\bundle
+rails generate devise:views
+      invoke  Devise::Generators::SharedViewsGenerator
+      create    app/views/devise/shared
+      create    app/views/devise/shared/_links.html.erb
+      invoke  form_for
+      create    app/views/devise/confirmations
+      create    app/views/devise/confirmations/new.html.erb
+      create    app/views/devise/passwords
+      create    app/views/devise/passwords/edit.html.erb
+      create    app/views/devise/passwords/new.html.erb
+      create    app/views/devise/registrations
+      create    app/views/devise/registrations/edit.html.erb
+      create    app/views/devise/registrations/new.html.erb
+      create    app/views/devise/sessions
+      create    app/views/devise/sessions/new.html.erb
+      create    app/views/devise/unlocks
+      create    app/views/devise/unlocks/new.html.erb
+      invoke  erb
+      create    app/views/devise/mailer
+      create    app/views/devise/mailer/confirmation_instructions.html.erb
+      create    app/views/devise/mailer/reset_password_instructions.html.erb
+      create    app/views/devise/mailer/unlock_instructions.html.erb
+rails generate layout:install bootstrap3
+C:\Users\dusan.krompic\Source\Ruby\snippet-executor>rails generate devise:views
+      invoke  Devise::Generators::SharedViewsGenerator
+      create    app/views/devise/shared
+      create    app/views/devise/shared/_links.html.erb
+      invoke  form_for
+      create    app/views/devise/confirmations
+      create    app/views/devise/confirmations/new.html.erb
+      create    app/views/devise/passwords
+      create    app/views/devise/passwords/edit.html.erb
+      create    app/views/devise/passwords/new.html.erb
+      create    app/views/devise/registrations
+      create    app/views/devise/registrations/edit.html.erb
+      create    app/views/devise/registrations/new.html.erb
+      create    app/views/devise/sessions
+      create    app/views/devise/sessions/new.html.erb
+      create    app/views/devise/unlocks
+      create    app/views/devise/unlocks/new.html.erb
+      invoke  erb
+      create    app/views/devise/mailer
+      create    app/views/devise/mailer/confirmation_instructions.html.erb
+      create    app/views/devise/mailer/reset_password_instructions.html.erb
+      create    app/views/devise/mailer/unlock_instructions.html.erb
+
+rails generate layout:install bootstrap3
+      remove  app/assets/stylesheets/application.css
+      create  app/assets/stylesheets/application.css.scss
+      create  app/assets/stylesheets/framework_and_overrides.css.scss
+    conflict  app/assets/javascripts/application.js
+Overwrite C:/Users/dusan.krompic/Source/Ruby/snippet-executor/app/assets/javascripts/application.js? (enter "h" for help) [Ynaqdh] y
+       force  app/assets/javascripts/application.js
+      remove  app/assets/stylesheets/simple.css
+      remove  app/assets/stylesheets/foundation_and_overrides.css.scss
+      append  app/assets/stylesheets/framework_and_overrides.css.scss
+      remove  app/views/layouts/application.html.erb
+      create  app/views/layouts/application.html.erb
+      create  app/views/layouts/_messages.html.erb
+      create  app/views/layouts/_navigation.html.erb
+      create  app/views/layouts/_navigation_links.html.erb
+rails generate layout:navigation
+   identical  app/views/layouts/_navigation_links.html.erb
+      append  app/views/layouts/_navigation_links.html.erb
+      create  spec/features/visitors/navigation_spec.rb
+rails generate layout:devise bootstrap3
+    conflict  app/views/devise/sessions/new.html.erb
+Overwrite C:/Users/dusan.krompic/Source/Ruby/snippet-executor/app/views/devise/sessions/new.html.erb? (enter "h" for help) [Ynaqdh] y
+       force  app/views/devise/sessions/new.html.erb
+    conflict  app/views/devise/passwords/new.html.erb
+Overwrite C:/Users/dusan.krompic/Source/Ruby/snippet-executor/app/views/devise/passwords/new.html.erb? (enter "h" for help) [Ynaqdh] y
+       force  app/views/devise/passwords/new.html.erb
+    conflict  app/views/devise/passwords/edit.html.erb
+Overwrite C:/Users/dusan.krompic/Source/Ruby/snippet-executor/app/views/devise/passwords/edit.html.erb? (enter "h" for help) [Ynaqdh] y
+       force  app/views/devise/passwords/edit.html.erb
+    conflict  app/views/devise/registrations/edit.html.erb
+Overwrite C:/Users/dusan.krompic/Source/Ruby/snippet-executor/app/views/devise/registrations/edit.html.erb? (enter "h" for help) [Ynaqdh] y
+       force  app/views/devise/registrations/edit.html.erb
+
+    
+DODATI:
+before_action :authenticate_user!
+
