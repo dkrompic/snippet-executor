@@ -1,0 +1,32 @@
+<h2>Snippets listing</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Content</th>
+      <th>User</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @snippets.each do |snippet| %>
+      <tr>
+        <td><%= link_to snippet.name, snippet %></td>
+        <td><%= snippet.content %></td>
+        <td><%= snippet.user.username %></td>
+        <td>
+          <%= link_to 'Edit', edit_snippet_path(snippet), class: 'btn btn-default btn-xs' %>
+          <%= link_to 'Remove', snippet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="actions">
+  <%= button_to 'Create Snippet', new_snippet_path, method: :get, :class => 'button-md' %>
+</div>

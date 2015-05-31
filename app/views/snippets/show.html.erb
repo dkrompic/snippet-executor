@@ -1,0 +1,41 @@
+<h2>Snippet Details</h1>
+
+<div class="container-fluid">
+  <br/>
+  <div class="row">
+    <div class="col-sm-3">
+
+      <p>
+        <strong>Name:</strong>
+        <%= @snippet.name %>
+      </p>
+
+      <p>
+        <strong>Content:</strong>
+        <%= @snippet.content %>
+      </p>
+
+      <p>
+        <strong>User:</strong>
+        <%= @snippet.user.username %>
+      </p>
+    </div>
+    
+    <div class="col-sm-9">
+      <p>
+        <strong>Execution output:</strong><br/>
+        <pre><%= @snippet.execution_output %></pre>
+      </p>
+    </div>
+  </div>
+    
+  <div class="row">
+    <div class="col-sm-12">
+      <%= link_to 'Edit', edit_snippet_path(@snippet), class: 'link-btn-md' %>
+      <%= link_to 'Back', snippets_path, class: 'link-btn-md' %>
+    </div>
+  </div>
+    
+</div>
+
+

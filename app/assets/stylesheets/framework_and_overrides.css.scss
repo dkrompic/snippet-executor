@@ -75,8 +75,25 @@ section {
 #error_explanation h2 {
   font-size: 16px;
 }
+.button {
+  @extend .btn;
+  @extend .btn-primary;
+}
 .button-xs {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-xs;
+}
+.button-md {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-sm;
+}
+.link-btn-md {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-sm;
+  &:visited {
+    color: #fff;
+  }
 }
