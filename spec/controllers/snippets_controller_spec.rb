@@ -19,12 +19,12 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe SnippetsController, type: :controller do
-
+  
   # This should return the minimal set of attributes required to create a valid
   # Snippet. As you add validations to Snippet, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    attributes_for(:snippet)
   }
 
   let(:invalid_attributes) {
@@ -38,7 +38,7 @@ RSpec.describe SnippetsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all snippets as @snippets" do
-      snippet = Snippet.create! valid_attributes
+      snippet = FactoryGirl.create(:snippet)
       get :index, {}, valid_session
       expect(assigns(:snippets)).to eq([snippet])
     end
@@ -46,14 +46,18 @@ RSpec.describe SnippetsController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested snippet as @snippet" do
-      snippet = Snippet.create! valid_attributes
+      snippet = FactoryGirl.create(:snippet)
       get :show, {:id => snippet.to_param}, valid_session
       expect(assigns(:snippet)).to eq(snippet)
     end
   end
 
-  describe "GET #new" do
+  describe "GET #new" do  
     it "assigns a new snippet as @snippet" do
+      user = FactoryGirl.create(:user)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in user
+
       get :new, {}, valid_session
       expect(assigns(:snippet)).to be_a_new(Snippet)
     end
@@ -61,7 +65,11 @@ RSpec.describe SnippetsController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested snippet as @snippet" do
-      snippet = Snippet.create! valid_attributes
+      user = FactoryGirl.create(:user)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in user
+
+      snippet = FactoryGirl.create(:snippet)
       get :edit, {:id => snippet.to_param}, valid_session
       expect(assigns(:snippet)).to eq(snippet)
     end
@@ -69,89 +77,107 @@ RSpec.describe SnippetsController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
+      before(:each) do
+        @user = FactoryGirl.create(:user)
+        @request.env["devise.mapping"] = Devise.mappings[:user]
+        sign_in @user
+      end
+      
       it "creates a new Snippet" do
         expect {
-          post :create, {:snippet => valid_attributes}, valid_session
+          post :create, {:snippet => attributes_for(:snippet).merge!(user_id: @user.id)}, valid_session
         }.to change(Snippet, :count).by(1)
       end
 
       it "assigns a newly created snippet as @snippet" do
-        post :create, {:snippet => valid_attributes}, valid_session
+        post :create, {:snippet => attributes_for(:snippet).merge!(user_id: @user.id)}, valid_session
         expect(assigns(:snippet)).to be_a(Snippet)
         expect(assigns(:snippet)).to be_persisted
       end
 
       it "redirects to the created snippet" do
-        post :create, {:snippet => valid_attributes}, valid_session
+        post :create, {:snippet => attributes_for(:snippet).merge!(user_id: @user.id)}, valid_session
         expect(response).to redirect_to(Snippet.last)
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved snippet as @snippet" do
-        post :create, {:snippet => invalid_attributes}, valid_session
-        expect(assigns(:snippet)).to be_a_new(Snippet)
-      end
+    # context "with invalid params" do
+      # it "assigns a newly created but unsaved snippet as @snippet" do
+        # post :create, {:snippet => invalid_attributes}, valid_session
+        # expect(assigns(:snippet)).to be_a_new(Snippet)
+      # end
 
-      it "re-renders the 'new' template" do
-        post :create, {:snippet => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
+      # it "re-renders the 'new' template" do
+        # post :create, {:snippet => invalid_attributes}, valid_session
+        # expect(response).to render_template("new")
+      # end
+    # end
   end
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested snippet" do
-        snippet = Snippet.create! valid_attributes
-        put :update, {:id => snippet.to_param, :snippet => new_attributes}, valid_session
-        snippet.reload
-        skip("Add assertions for updated state")
+      before(:each) do
+        @user = FactoryGirl.create(:user)
+        @request.env["devise.mapping"] = Devise.mappings[:user]
+        sign_in @user
       end
+          
+      # let(:new_attributes) {
+        # attibutes_for(:snippet)
+      # }
+
+      # it "updates the requested snippet" do
+        # snippet = Snippet.create! valid_attributes
+        # put :update, {:id => snippet.to_param, :snippet => new_attributes}, valid_session
+        # snippet.reload
+        # skip("Add assertions for updated state")
+      # end
 
       it "assigns the requested snippet as @snippet" do
-        snippet = Snippet.create! valid_attributes
-        put :update, {:id => snippet.to_param, :snippet => valid_attributes}, valid_session
+        snippet = FactoryGirl.create(:snippet)
+        put :update, {:id => snippet.to_param, :snippet => valid_attributes.merge!(user_id: @user.id)}, valid_session
         expect(assigns(:snippet)).to eq(snippet)
       end
 
       it "redirects to the snippet" do
-        snippet = Snippet.create! valid_attributes
-        put :update, {:id => snippet.to_param, :snippet => valid_attributes}, valid_session
+        snippet = FactoryGirl.create(:snippet)
+        put :update, {:id => snippet.to_param, :snippet => valid_attributes.merge!(user_id: @user.id)}, valid_session
         expect(response).to redirect_to(snippet)
       end
     end
 
-    context "with invalid params" do
-      it "assigns the snippet as @snippet" do
-        snippet = Snippet.create! valid_attributes
-        put :update, {:id => snippet.to_param, :snippet => invalid_attributes}, valid_session
-        expect(assigns(:snippet)).to eq(snippet)
-      end
+    # context "with invalid params" do
+      # it "assigns the snippet as @snippet" do
+        # snippet = Snippet.create! valid_attributes
+        # put :update, {:id => snippet.to_param, :snippet => invalid_attributes.merge!(user_id: @user.id)}, valid_session
+        # expect(assigns(:snippet)).to eq(snippet)
+      # end
 
-      it "re-renders the 'edit' template" do
-        snippet = Snippet.create! valid_attributes
-        put :update, {:id => snippet.to_param, :snippet => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
+      # it "re-renders the 'edit' template" do
+        # snippet = Snippet.create! valid_attributes
+        # put :update, {:id => snippet.to_param, :snippet => invalid_attributes.merge!(user_id: @user.id)}, valid_session
+        # expect(response).to render_template("edit")
+      # end
+    # end
   end
 
   describe "DELETE #destroy" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in @user
+      
+      @snippet = FactoryGirl.create(:snippet)
+    end
+    
     it "destroys the requested snippet" do
-      snippet = Snippet.create! valid_attributes
       expect {
-        delete :destroy, {:id => snippet.to_param}, valid_session
+        delete :destroy, {:id => @snippet.to_param}, valid_session
       }.to change(Snippet, :count).by(-1)
     end
 
     it "redirects to the snippets list" do
-      snippet = Snippet.create! valid_attributes
-      delete :destroy, {:id => snippet.to_param}, valid_session
+      delete :destroy, {:id => @snippet.to_param}, valid_session
       expect(response).to redirect_to(snippets_url)
     end
   end
