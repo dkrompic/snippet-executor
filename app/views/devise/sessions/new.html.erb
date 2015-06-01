@@ -2,7 +2,7 @@
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => { :role => 'form'}) do |f| %>
   
-    <h2>Sign in</h2>
+    <h2>Log in</h2>
     
     <%= devise_error_messages! %>
     
@@ -18,7 +18,7 @@
       <%= f.password_field :password, class: 'form-control' %>
     </div>
     
-    <%= f.submit 'Sign in', :class => 'button right' %>
+    <%= f.submit 'Log in', :class => 'button right' %>
     
     <% if devise_mapping.rememberable? -%>
       <div class="checkbox" style="width:150px">

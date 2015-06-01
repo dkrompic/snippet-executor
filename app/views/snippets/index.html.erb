@@ -17,8 +17,8 @@
         <td><%= snippet.content %></td>
         <td><%= snippet.user.username %></td>
         <td>
-          <%= link_to 'Edit', edit_snippet_path(snippet), class: 'btn btn-default btn-xs' %>
-          <%= link_to 'Remove', snippet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default btn-xs' %>
+          <%= link_to 'Edit', edit_snippet_path(snippet), id: 'Edit', class: 'btn btn-default btn-xs' %>
+          <%= link_to 'Remove', snippet, method: :delete, id: 'Remove', data: { confirm: 'Are you sure?' }, class: 'btn btn-default btn-xs' %>
         </td>
       </tr>
     <% end %>
