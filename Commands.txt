@@ -39,6 +39,13 @@ bundle exec rails generate cucumber:install
         gsub  config/database.yml
        force  config/database.yml
 
+# Following is done bacause of issue 
+#     WARNING: cannot load such file -- 2.1/gherkin_lexer_en
+#     Couldn't load 2.1/gherkin_lexer_en
+#     The $LOAD_PATH was:
+# Gem file updated with - gem 'gherkin', platforms: :ruby
+# File "C:\Users\dusan.krompic\Source\Ruby\shop\vendor\bundle\ruby\2.1.0\gems\gherkin-2.12.2\lib\gherkin\c_lexer.rb" updated with - prefix = ''
+  
 # Gem file updated - 'devise' added
 rails generate devise:install
       create  config/initializers/devise.rb
@@ -192,3 +199,7 @@ rails s
 
 # Test time!
 bundle exec rake db:migrate RAILS_ENV=test
+
+# GitHub repo created
+git remote add origin https://github.com/dkrompic/snippet-executor.git
+git push -u origin master

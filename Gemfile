@@ -40,9 +40,12 @@ gem 'bootstrap-sass'
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'gherkin', platforms: :ruby
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'selenium-webdriver'
+  gem "capybara"
+  gem "launchy"
 end
 
 group :development do
