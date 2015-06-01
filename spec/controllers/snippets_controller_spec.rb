@@ -97,7 +97,7 @@ RSpec.describe SnippetsController, type: :controller do
 
       it "redirects to the created snippet" do
         post :create, {:snippet => attributes_for(:snippet).merge!(user_id: @user.id)}, valid_session
-        expect(response).to redirect_to(Snippet.last)
+        expect(response).to redirect_to(snippets_url)
       end
     end
 
@@ -142,7 +142,7 @@ RSpec.describe SnippetsController, type: :controller do
       it "redirects to the snippet" do
         snippet = FactoryGirl.create(:snippet)
         put :update, {:id => snippet.to_param, :snippet => valid_attributes.merge!(user_id: @user.id)}, valid_session
-        expect(response).to redirect_to(snippet)
+        expect(response).to redirect_to(snippets_url)
       end
     end
 
