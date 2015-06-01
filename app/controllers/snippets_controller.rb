@@ -1,6 +1,8 @@
 class SnippetsController < ApplicationController
-  before_action :set_snippet, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  include SnippetsHelper
+
+  before_action :set_snippet, only: [:show, :edit, :update, :destroy, :execute]
+  before_action :authenticate_user!, except: [:index, :show, :execute]
 
   # GET /snippets
   # GET /snippets.json
@@ -59,6 +61,29 @@ class SnippetsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to snippets_url, notice: 'Snippet was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /snippets/execute
+  def execute
+    begin
+      output = execute_command(@snippet.content, :text)
+      @snippet.execution_output = output
+    rescue StandardError => e
+      output = nil
+    end
+
+    update_params = {'execution_output' => @snippet.execution_output}
+  
+    respond_to do |format|
+      if output and @snippet.update(update_params)
+        format.html { redirect_to @snippet, notice: 'Snippet content was successfully executed.' }
+        format.json { render :show, status: :ok, location: @snippet }
+      else
+        error_message = 'Snippet content execution failed.'
+        format.html { redirect_to @snippet, alert: error_message }
+        format.json { render json: error_message, status: :ok, location: @snippet }      
+      end
     end
   end
 
