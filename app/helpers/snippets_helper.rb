@@ -2,8 +2,18 @@ require 'Open3'
 
 module SnippetsHelper
 
-  # Executes 'command' and returns :json (default), :hash or :text format
-  def execute_command(command, format=:json)
+  # Executes recieves 'command' and 'cmd_output_format' parameters, and returns hash with status and command execution output.
+  # Result hash format is {success: <true|false>, stdout: [<stdout ouput>], stderr: [<stderr output>]}
+  # Reported status can be true or false
+  # Result example: {success: true, stdout: ["hello!\n"], stderr:[]}
+  def execute_command(command)
+    execute_command_locally(command)
+  end
+  
+  def execute_command_remotelly(command)
+  end
+  
+  def execute_command_locally(command)
     begin
       stdin, stdout, stderr = Open3.popen3(command)
       stdout_lines = []
@@ -14,18 +24,11 @@ module SnippetsHelper
       while line = stderr.gets do
         stderr_lines += [line]
       end
-      output = {'output' => {'stdout' => stdout_lines, 'stderr' => stderr_lines}}
-      case format
-        when :text
-          "#{stdout_lines.join('')}#{stderr_lines.join('')}"
-        when :hash
-           output
-        else
-           JSON.generate(output)
-        end
+      {success: true, stdout: stdout_lines, stderr: stderr_lines}
+    rescue Errno::ENOENT => e
+      {success: true, stdout: [], stderr: ["#{e.message}\n"]}
     rescue StandardError => e
-      "Error #{e.message} occured!"
-      nil
+      {success: false, stdout: [], stderr: ["#{e.message}\n"]}
     ensure
       stdin.close unless stdin.nil?
       stdout.close unless stdin.nil?
