@@ -52,7 +52,8 @@ Feature: Manage code snippets
     When I execute snippet <name> with <content>
     Then I should see <output>
       Examples:
-       | name                 | content                           | output          |
-       | "Print message"      | "echo Hello world"                | "Hello world"   |
-       | "Create file"        | "echo file content \> file\.txt"  | ""              |
-       | "Show file content"  | "cat file.txt"                    | "file content"  |
+       | name                 | content                           | output                                   |
+       | "Print message"      | "echo Hello world"                | "Hello world"                            |
+       | "Create file"        | "echo file content \> file\.txt"  | ""                                       |
+       | "Show file content"  | "cat file.txt"                    | "file content"                           |
+       | "Bad command"        | "badcommand"                      | "No such file or directory - badcommand" |

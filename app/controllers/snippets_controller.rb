@@ -66,21 +66,16 @@ class SnippetsController < ApplicationController
 
   # GET /snippets/execute
   def execute
-    begin
-      output = execute_command(@snippet.content, :text)
-      @snippet.execution_output = output
-    rescue StandardError => e
-      output = nil
-    end
-
+    output = execute_command(@snippet.content)
+    @snippet.execution_output = "#{output[:stdout].join('')}#{output[:stderr].join('')}"
     update_params = {'execution_output' => @snippet.execution_output}
   
     respond_to do |format|
-      if output and @snippet.update(update_params)
+      if output[:success] and @snippet.update(update_params)
         format.html { redirect_to @snippet, notice: 'Snippet content was successfully executed.' }
         format.json { render :show, status: :ok, location: @snippet }
       else
-        error_message = 'Snippet content execution failed.'
+        error_message = "Snipped execution failed!"
         format.html { redirect_to @snippet, alert: error_message }
         format.json { render json: error_message, status: :ok, location: @snippet }      
       end
