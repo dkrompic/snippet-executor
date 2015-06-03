@@ -66,7 +66,7 @@ class SnippetsController < ApplicationController
 
   # GET /snippets/execute
   def execute
-    output = execute_command(@snippet.content)
+    output = execute_snippet_content(@snippet.content)
     @snippet.execution_output = "#{output[:stdout].join('')}#{output[:stderr].join('')}"
     update_params = {'execution_output' => @snippet.execution_output}
   

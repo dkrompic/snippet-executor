@@ -31,5 +31,9 @@ module SnippetExecutor
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.before_initialize do
+      Rails.configuration.custom = YAML.load_file("#{Rails.root}/config/custom_config.yml")
+    end
   end
 end
