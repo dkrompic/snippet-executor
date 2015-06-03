@@ -1,4 +1,4 @@
-require 'Open3'
+require 'open3'
 require 'rest-client'
 require 'base64'
 
