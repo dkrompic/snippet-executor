@@ -21,18 +21,15 @@
       </p>
     </div>
     
-    <div class="col-sm-9">
-      <p>
-        <strong>Execution output:</strong><br/>
-        <pre><%= @snippet.execution_output %></pre>
-      </p>
+    <div id="snippet_content" class="col-sm-9">
+      <%= render 'snippet_content' %>
     </div>
   </div>
     
   <div class="row">
     <div class="col-sm-12">
       <%= link_to 'Edit', edit_snippet_path(@snippet), class: 'link-btn-md' %>
-      <%= link_to 'Execute', execute_snippet_path(@snippet), class: 'link-btn-md' %>
+      <%= link_to 'Execute', execute_snippet_path(@snippet), remote: true, class: 'link-btn-md' %>
       <%= link_to 'Back', snippets_path, class: 'link-btn-md' %>
     </div>
   </div>

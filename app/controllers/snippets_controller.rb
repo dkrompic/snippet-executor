@@ -72,12 +72,14 @@ class SnippetsController < ApplicationController
   
     respond_to do |format|
       if output[:success] and @snippet.update(update_params)
-        format.html { redirect_to @snippet, notice: 'Snippet content was successfully executed.' }
+        notice_message = 'Snippet content was successfully executed.'
+        format.html { redirect_to @snippet, notice: notice_message }
+        format.js { flash.now[:notice] = notice_message }
         format.json { render :show, status: :ok, location: @snippet }
       else
-        error_message = "Snipped execution failed!"
-        format.html { redirect_to @snippet, alert: error_message }
-        format.json { render json: error_message, status: :ok, location: @snippet }      
+        alert_message = 'Snipped content execution failed!'
+        format.html { redirect_to @snippet, alert: alert_message }
+        format.json { render json: alert_message, status: :ok, location: @snippet }      
       end
     end
   end
