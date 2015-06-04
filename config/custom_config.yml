@@ -11,3 +11,6 @@ test: &test
 
 production:
   <<: *default
+  
+  command_execute:
+    url: <%= ENV['COMMAND_EXECUTE_URL'] %>

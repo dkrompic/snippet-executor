@@ -203,3 +203,205 @@ bundle exec rake db:migrate RAILS_ENV=test
 # GitHub repo created
 git remote add origin https://github.com/dkrompic/snippet-executor.git
 git push -u origin master
+
+##########################
+# HEROKU
+##########################
+
+d:\Source\Ruby\snippet-executor>heroku create snippet-executor
+Your version of git is 1.8.4.. Which has serious security vulnerabilities.
+More information here: https://blog.heroku.com/archives/2014/12/23/update_your_git_clients_on_windows_and_os_x
+Creating snippet-executor... done, stack is cedar-14
+https://snippet-executor.herokuapp.com/ | https://git.heroku.com/snippet-executor.git
+
+d:\Source\Ruby\snippet-executor>git push heroku master
+Counting objects: 358, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (318/318), done.
+Writing objects: 100% (358/358), 70.47 KiB | 0 bytes/s, done.
+Total 358 (delta 127), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Ruby app detected
+remote: -----> Compiling Ruby/Rails
+remote: -----> Using Ruby version: ruby-2.0.0
+remote: ###### WARNING:
+remote:        Removing `Gemfile.lock` because it was generated on Windows.
+remote:        Bundler will do a full resolve so native gems are handled properly.
+remote:        This may result in unexpected gem versions being used in your app.
+remote:        In rare occasions Bundler may not be able to resolve your dependencies at all.
+remote:        https://devcenter.heroku.com/articles/bundler-windows-gemfile
+remote:
+remote: -----> Installing dependencies using 1.9.7
+remote:        Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4
+remote:        Fetching gem metadata from http://rubygems.org/.........
+remote:        Fetching version metadata from http://rubygems.org/...
+remote:        Fetching dependency metadata from http://rubygems.org/..
+remote:        Resolving dependencies......
+remote:        Rubygems 2.0.14 is not threadsafe, so your gems must be installed one at a time. Upgrade to Rubygems 2.1.0 or higher to enable parallel gem insta
+llation.
+remote:        Installing rake 10.4.2
+remote:        Installing i18n 0.7.0
+remote:        Installing json 1.8.3
+remote:        Installing minitest 5.7.0
+remote:        Installing thread_safe 0.3.5
+remote:        Installing tzinfo 1.2.2
+remote:        Installing activesupport 4.2.1
+remote:        Installing builder 3.2.2
+remote:        Installing erubis 2.7.0
+remote:        Installing mini_portile 0.6.2
+remote:        Installing nokogiri 1.6.6.2
+remote:        Installing rails-deprecated_sanitizer 1.0.3
+remote:        Installing rails-dom-testing 1.0.6
+remote:        Installing loofah 2.0.2
+remote:        Installing rails-html-sanitizer 1.0.2
+remote:        Installing actionview 4.2.1
+remote:        Installing rack 1.6.1
+remote:        Installing rack-test 0.6.3
+remote:        Installing actionpack 4.2.1
+remote:        Installing globalid 0.3.5
+remote:        Installing activejob 4.2.1
+remote:        Installing mime-types 2.6.1
+remote:        Installing mail 2.6.3
+remote:        Installing actionmailer 4.2.1
+remote:        Installing activemodel 4.2.1
+remote:        Installing arel 6.0.0
+remote:        Installing activerecord 4.2.1
+remote:        Installing execjs 2.5.2
+remote:        Installing autoprefixer-rails 5.2.0
+remote:        Installing bcrypt 3.1.10
+remote:        Installing sass 3.4.14
+remote:        Installing bootstrap-sass 3.3.4.1
+remote:        Using bundler 1.9.7
+remote:        Installing coffee-script-source 1.9.1.1
+remote:        Installing coffee-script 2.4.1
+remote:        Installing thor 0.19.1
+remote:        Installing railties 4.2.1
+remote:        Installing coffee-rails 4.1.0
+remote:        Installing orm_adapter 0.5.0
+remote:        Installing responders 2.1.0
+remote:        Installing warden 1.2.3
+remote:        Installing devise 3.5.1
+remote:        Installing unf_ext 0.0.7.1
+remote:        Installing unf 0.1.4
+remote:        Installing domain_name 0.5.24
+remote:        Installing http-cookie 1.0.2
+remote:        Installing multi_json 1.11.0
+remote:        Installing jbuilder 2.2.16
+remote:        Installing jquery-rails 4.0.3
+remote:        Installing netrc 0.10.3
+remote:        Installing pg 0.18.2
+remote:        Installing sprockets 3.2.0
+remote:        Installing sprockets-rails 2.3.1
+remote:        Installing rails 4.2.1
+remote:        Installing rdoc 4.2.0
+remote:        Installing rest-client 1.8.0
+remote:        Installing tilt 1.4.1
+remote:        Installing sass-rails 5.0.3
+remote:        Installing sdoc 0.4.1
+remote:        Installing turbolinks 2.5.3
+remote:        Installing uglifier 2.7.1
+remote:        Bundle complete! 25 Gemfile dependencies, 61 gems now installed.
+remote:        Gems in the groups development and test were not installed.
+remote:        Bundled gems are installed into ./vendor/bundle.
+remote:        Post-install message from rdoc:
+remote:        Depending on your version of ruby, you may need to install ruby rdoc/ri data:
+remote:        <= 1.8.6 : unsupported
+remote:        = 1.8.7 : gem install rdoc-data; rdoc-data --install
+remote:        = 1.9.1 : gem install rdoc-data; rdoc-data --install
+remote:        >= 1.9.2 : nothing to do! Yay!
+remote:        Bundle completed (80.33s)
+remote:        Cleaning up the bundler cache.
+remote: -----> Preparing app for Rails asset pipeline
+remote:        Running: rake assets:precompile
+remote:        I, [2015-06-04T21:00:29.000895 #1062]  INFO -- : Writing /tmp/build_89595680bae95b92810d4e07115d5cf7/public/assets/application-0cd433515d92721265
+5e688ebba7b0efae02445cb2cf7c5e55d3eb4d016f9956.js
+remote:        I, [2015-06-04T21:00:42.806131 #1062]  INFO -- : Writing /tmp/build_89595680bae95b92810d4e07115d5cf7/public/assets/application-7dee15d427b7a55f9b
+d68c6f36484efa25ca216746ba3d2acb7f1c586dc03ff9.css
+remote:        I, [2015-06-04T21:00:42.810352 #1062]  INFO -- : Writing /tmp/build_89595680bae95b92810d4e07115d5cf7/public/assets/bootstrap/glyphicons-halflings
+-regular-13634da87d9e23f8c3ed9108ce1724d183a39ad072e73e1b3d8cbf646d2d0407.eot
+remote:        I, [2015-06-04T21:00:42.811055 #1062]  INFO -- : Writing /tmp/build_89595680bae95b92810d4e07115d5cf7/public/assets/bootstrap/glyphicons-halflings
+-regular-42f60659d265c1a3c30f9fa42abcbb56bd4a53af4d83d316d6dd7a36903c43e5.svg
+remote:        I, [2015-06-04T21:00:42.811916 #1062]  INFO -- : Writing /tmp/build_89595680bae95b92810d4e07115d5cf7/public/assets/bootstrap/glyphicons-halflings
+-regular-e395044093757d82afcb138957d06a1ea9361bdcf0b442d06a18a8051af57456.ttf
+remote:        I, [2015-06-04T21:00:42.812607 #1062]  INFO -- : Writing /tmp/build_89595680bae95b92810d4e07115d5cf7/public/assets/bootstrap/glyphicons-halflings
+-regular-a26394f7ede100ca118eff2eda08596275a9839b959c226e15439557a5a80742.woff
+remote:        I, [2015-06-04T21:00:42.813165 #1062]  INFO -- : Writing /tmp/build_89595680bae95b92810d4e07115d5cf7/public/assets/bootstrap/glyphicons-halflings
+-regular-fe185d11a49676890d47bb783312a0cda5a44c4039214094e7957b4c040ef11c.woff2
+remote:        Asset precompilation completed (23.02s)
+remote:        Cleaning assets
+remote:        Running: rake assets:clean
+remote:
+remote: ###### WARNING:
+remote:        Include 'rails_12factor' gem to enable all platform features
+remote:        See https://devcenter.heroku.com/articles/rails-integration-gems for more information.
+remote:
+remote: ###### WARNING:
+remote:        You have not declared a Ruby version in your Gemfile.
+remote:        To set your Ruby version add this line to your Gemfile:
+remote:        ruby '2.0.0'
+remote:        # See https://devcenter.heroku.com/articles/ruby-versions for more information.
+remote:
+remote: ###### WARNING:
+remote:        Removing `Gemfile.lock` because it was generated on Windows.
+remote:        Bundler will do a full resolve so native gems are handled properly.
+remote:        This may result in unexpected gem versions being used in your app.
+remote:        In rare occasions Bundler may not be able to resolve your dependencies at all.
+remote:        https://devcenter.heroku.com/articles/bundler-windows-gemfile
+remote:
+remote: ###### WARNING:
+remote:        No Procfile detected, using the default web server (webrick)
+remote:        https://devcenter.heroku.com/articles/ruby-default-web-server
+remote:
+remote: -----> Discovering process types
+remote:        Procfile declares types -> (none)
+remote:        Default types for Ruby  -> console, rake, web, worker
+remote:
+remote: -----> Compressing... done, 30.7MB
+remote: -----> Launching... done, v5
+remote:        https://radiant-tundra-7533.herokuapp.com/ deployed to Heroku
+remote:
+remote: Verifying deploy... done.
+To https://git.heroku.com/radiant-tundra-7533.git
+ * [new branch]      master -> master
+ 
+ 
+d:\Source\Ruby\snippet-executor> heroku open
+Your version of git is 1.8.4.. Which has serious security vulnerabilities.
+More information here: https://blog.heroku.com/archives/2014/12/23/update_your_git_clients_on_windows_and_os_x
+Opening radiant-tundra-7533... done
+
+d:\Source\Ruby\snippet-executor>git remote -v
+heroku  https://git.heroku.com/radiant-tundra-7533.git (fetch)
+heroku  https://git.heroku.com/radiant-tundra-7533.git (push)
+origin  https://github.com/dkrompic/snippet-executor.git (fetch)
+origin  https://github.com/dkrompic/snippet-executor.git (push)
+
+d:\Source\Ruby\snippet-executor>heroku run rake db:migrate
+Your version of git is 1.8.4.. Which has serious security vulnerabilities.
+More information here: https://blog.heroku.com/archives/2014/12/23/update_your_git_clients_on_windows_and_os_x
+Running `rake db:migrate` attached to terminal... up, run.4051
+== 20150528214024 DeviseCreateUsers: migrating ================================
+-- create_table(:users)
+   -> 0.0474s
+-- add_index(:users, :email, {:unique=>true})
+   -> 0.0244s
+-- add_index(:users, :reset_password_token, {:unique=>true})
+   -> 0.0291s
+== 20150528214024 DeviseCreateUsers: migrated (0.1013s) =======================
+
+== 20150528214942 AddUsernameToUsers: migrating ===============================
+-- add_column(:users, :username, :string)
+   -> 0.0029s
+-- add_index(:users, :username, {:unique=>true})
+   -> 0.0251s
+== 20150528214942 AddUsernameToUsers: migrated (0.0282s) ======================
+
+== 20150529080504 CreateSnippets: migrating ===================================
+-- create_table(:snippets)
+   -> 0.0882s
+== 20150529080504 CreateSnippets: migrated (0.0884s) ==========================
+
+bundle config build.puma --with-opt-dir=c:\openssl64
+bundle install --path vendor\bundle
