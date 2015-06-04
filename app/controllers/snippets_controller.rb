@@ -2,7 +2,7 @@ class SnippetsController < ApplicationController
   include SnippetsHelper
 
   before_action :set_snippet, only: [:show, :edit, :update, :destroy, :execute]
-  before_action :authenticate_user!, except: [:index, :show, :execute]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /snippets
   # GET /snippets.json
@@ -69,7 +69,6 @@ class SnippetsController < ApplicationController
     output = execute_snippet_content(@snippet.content)
     @snippet.execution_output = "#{output[:stdout].join('')}#{output[:stderr].join('')}"
     update_params = {'execution_output' => @snippet.execution_output}
-  
     respond_to do |format|
       if output[:success] and @snippet.update(update_params)
         notice_message = 'Snippet content was successfully executed.'
@@ -79,6 +78,7 @@ class SnippetsController < ApplicationController
       else
         alert_message = 'Snipped content execution failed!'
         format.html { redirect_to @snippet, alert: alert_message }
+        format.js { flash.now[:alert] = alert_message }
         format.json { render json: alert_message, status: :ok, location: @snippet }      
       end
     end
