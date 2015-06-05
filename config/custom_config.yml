@@ -1,7 +1,6 @@
 default: &default
-  command_execute:
-    url:  'localhost:4567/execute'
-    auth: 'rails_user:rails_pass'
+  command_execute_url:  'localhost:4567/execute'
+  command_execute_auth: 'rails_user:rails_pass'
 
 development:
   <<: *default
@@ -10,7 +9,5 @@ test: &test
   <<: *default
 
 production:
-  <<: *default
-  
-  command_execute:
-    url: <%= ENV['COMMAND_EXECUTE_URL'] %>
+  <<: *default  
+  command_execute_url: <%= ENV['COMMAND_EXECUTE_URL'] %>

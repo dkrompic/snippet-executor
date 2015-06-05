@@ -33,7 +33,8 @@ module SnippetExecutor
     config.active_record.raise_in_transactional_callbacks = true
 
     config.before_initialize do
-      Rails.configuration.custom = YAML.load_file("#{Rails.root}/config/custom_config.yml")
+      custom_config_yaml = ERB.new File.new("#{Rails.root}/config/custom_config.yml").read
+      Rails.configuration.custom = YAML.load custom_config_yaml.result(binding)
     end
   end
 end

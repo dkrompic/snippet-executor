@@ -6,10 +6,10 @@ module SnippetsHelper
 
   # In 'production' or 'development' environment command is executed aginst REST service, whilst in 'test' environment it is executed locally
   def execute_snippet_content(command)
-    if ['production', 'development'].include?(Rails.env.to_s)
+    unless Rails.env.test?
       begin
-        credentials = Rails.configuration.custom[Rails.env]['command_execute']['auth']
-        url = Rails.configuration.custom[Rails.env]['command_execute']['url']
+        credentials = Rails.configuration.custom[Rails.env]['command_execute_auth']
+        url = Rails.configuration.custom[Rails.env]['command_execute_url']
 
         auth = 'Basic ' + Base64.encode64(credentials).chomp
         response = RestClient.get url, {params: {command: command}, Authorization: auth}
@@ -17,6 +17,7 @@ module SnippetsHelper
         JSON.parse(response, symbolize_names: true) 
       rescue StandardError => e
         logger.error "Snippet execution failed with message: #{e.message}"
+        logger.error "Snippet execution failed with message: #{e.backtrace.join("\n")}"
         {success: false, stdout: [], stderr: ["#{e.message}\n"]}
       end
     else
